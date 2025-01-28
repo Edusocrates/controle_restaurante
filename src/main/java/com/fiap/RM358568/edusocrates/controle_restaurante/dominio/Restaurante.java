@@ -33,6 +33,4 @@ public class Restaurante {
     @OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas;
 
-    // Getters e Setters
-    // Construtores, equals, hashCode, toString
 }
