@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+    hikari:
+      connection-timeout: 60000 # 60 segundos
+      max-lifetime: 1800000 # 30 minutos
+      idle-timeout: 30000 # 30 segundos
+      maximum-pool-size: 10
+  logging:
+    level:
+      org.springframework.jdbc.core: DEBUG
