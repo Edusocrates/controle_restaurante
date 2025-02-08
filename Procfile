@@ -1,1 +1,1 @@
-web: java -jar target/seu-app.jar
+web: java -Dserver.port=$PORT -jar target/controle_restaurante.jar
