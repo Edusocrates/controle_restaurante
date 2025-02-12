@@ -1,6 +1,8 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.dominio;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,8 +19,13 @@ public class Mesa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Min(value = 1, message = "O número da mesa deve ser maior que zero")
     private int numero;
+
+    @Min(value = 1, message = "A capacidade da mesa deve ser maior que zero")
     private int capacidade;
+
+    @NotBlank(message = "O status da mesa não pode estar vazio")
     private String status;
 
     @ManyToOne
