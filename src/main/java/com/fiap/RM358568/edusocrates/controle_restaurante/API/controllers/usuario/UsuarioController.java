@@ -1,4 +1,4 @@
-package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers;
+package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.usuario;
 
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.UsuarioDTO;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.UsuarioUseCase;
