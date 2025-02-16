@@ -1,38 +1,17 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.RestauranteMapper;
+
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.RestauranteDTO;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Restaurante;
-import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.RestauranteRepository;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
-public class RestauranteUseCase {
+public interface RestauranteUseCase {
 
-    @Autowired
-    private RestauranteRepository restauranteRepository;
 
-    @Autowired
-    private RestauranteMapper restauranteMapper;
 
-    public List<RestauranteDTO> buscarTodos() {
-        return restauranteRepository.findAll().stream().map(restauranteMapper::toDTO).collect(Collectors.toList());
-    }
+     List<RestauranteDTO> buscarTodos();
 
-    public RestauranteDTO buscarPorId(Long id) {
-        Restaurante restaurante = restauranteRepository.findById(id).orElseThrow(() -> new RuntimeException("Restaurante não encontrado."));
-        return restauranteMapper.toDTO(restaurante);
-    }
+     RestauranteDTO buscarPorId(Long id);
 
-    @Transactional
-    public RestauranteDTO salvar(RestauranteDTO dto) {
-        Restaurante restaurante = restauranteMapper.toEntity(dto);
-        restaurante = restauranteRepository.save(restaurante);
-        return restauranteMapper.toDTO(restaurante);
-    }
+     RestauranteDTO salvar(RestauranteDTO dto);
 }
 

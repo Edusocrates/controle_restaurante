@@ -1,6 +1,7 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.servicos;
 
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.ReservaMapper;
+import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.ReservaUseCase;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.ReservaDTO;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Mesa;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Reserva;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class ReservaService {
+public class ReservaService implements ReservaUseCase {
 
     @Autowired
     private ReservaRepository reservaRepository;
@@ -36,11 +37,13 @@ public class ReservaService {
     @Autowired
     private ReservaMapper reservaMapper;
 
+    @Override
     public List<ReservaDTO> buscarPorRestaurante(Long restauranteId) {
         return reservaRepository.findByRestauranteId(restauranteId).stream().map(reservaMapper::toDTO).collect(Collectors.toList());
     }
 
     @Transactional
+    @Override
     public ReservaDTO salvar(ReservaDTO dto) {
         Restaurante restaurante = restauranteRepository.findById(dto.getRestauranteId()).orElseThrow(() -> new RuntimeException("Restaurante não encontrado."));
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));

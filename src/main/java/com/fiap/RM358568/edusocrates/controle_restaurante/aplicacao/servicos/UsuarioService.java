@@ -1,6 +1,7 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.servicos;
 
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.UsuarioMapper;
+import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.UsuarioUseCase;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.UsuarioDTO;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Usuario;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.UsuarioRepository;
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UsuarioUseCase {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -17,6 +18,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioMapper usuarioMapper;
 
+    @Override
     public UsuarioDTO buscarPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
@@ -24,6 +26,7 @@ public class UsuarioService {
     }
 
     @Transactional
+    @Override
     public UsuarioDTO salvar(UsuarioDTO dto) {
         Usuario usuario = usuarioMapper.toEntity(dto);
         usuario = usuarioRepository.save(usuario);
