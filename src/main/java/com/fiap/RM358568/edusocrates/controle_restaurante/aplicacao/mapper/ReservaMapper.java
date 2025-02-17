@@ -1,37 +1,38 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.ReservaDTO;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Mesa;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Reserva;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Restaurante;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Usuario;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.ReservaRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.ReservaResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Mesa;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Reserva;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ReservaMapper {
 
-    public ReservaDTO toDTO(Reserva reserva) {
-        ReservaDTO dto = new ReservaDTO();
-        dto.setId(reserva.getId());
-        dto.setData(reserva.getData());
-        dto.setHorario(reserva.getHorario());
-        dto.setNumeroDePessoas(reserva.getNumeroDePessoas());
-        dto.setStatus(reserva.getStatus());
-        dto.setRestauranteId(reserva.getRestaurante().getId());
-        dto.setMesaId(reserva.getMesa().getId());
-        dto.setUsuarioId(reserva.getUsuario().getId());
-        return dto;
-    }
-
-    public Reserva toEntity(ReservaDTO dto, Restaurante restaurante, Mesa mesa, Usuario usuario) {
+    public Reserva toEntity(ReservaRequest reservaRequest, Restaurante restaurante, Mesa mesa, Usuario usuario) {
         Reserva reserva = new Reserva();
-        reserva.setData(dto.getData());
-        reserva.setHorario(dto.getHorario());
-        reserva.setNumeroDePessoas(dto.getNumeroDePessoas());
-        reserva.setStatus(dto.getStatus());
+        reserva.setData(reservaRequest.data());
+        reserva.setHorario(reservaRequest.horario());
+        reserva.setNumeroDePessoas(reservaRequest.numeroDePessoas());
+        reserva.setStatus(reservaRequest.status());
         reserva.setRestaurante(restaurante);
         reserva.setMesa(mesa);
         reserva.setUsuario(usuario);
         return reserva;
+    }
+
+    public ReservaResponse toResponse(Reserva reserva) {
+        return new ReservaResponse(
+                reserva.getId(),
+                reserva.getData(),
+                reserva.getHorario(),
+                reserva.getNumeroDePessoas(),
+                reserva.getStatus(),
+                reserva.getRestaurante().getId(),
+                reserva.getMesa().getId(),
+                reserva.getUsuario().getId()
+        );
     }
 }

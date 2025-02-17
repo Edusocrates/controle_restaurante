@@ -1,6 +1,6 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Reserva;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

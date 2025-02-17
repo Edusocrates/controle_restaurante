@@ -1,33 +1,47 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Avaliacao;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.AvaliacaoDTO;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Restaurante;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Usuario;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.AvaliacaoRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.AvaliacaoResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Avaliacao;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Component
 public class AvaliacaoMapper {
 
-    public AvaliacaoDTO toDTO(Avaliacao avaliacao) {
-        AvaliacaoDTO dto = new AvaliacaoDTO();
-        dto.setId(avaliacao.getId());
-        dto.setNota(avaliacao.getNota());
-        dto.setComentario(avaliacao.getComentario());
-        dto.setData(avaliacao.getData());
-        dto.setRestauranteId(avaliacao.getRestaurante().getId());
-        dto.setUsuarioId(avaliacao.getUsuario().getId());
-        return dto;
-    }
+    @Autowired
+    private UsuarioMapper usuarioMapper;
 
-    public Avaliacao toEntity(AvaliacaoDTO dto, Restaurante restaurante, Usuario usuario) {
+    @Autowired
+    private RestauranteMapper restauranteMapper;
+
+
+    public Avaliacao toEntity(AvaliacaoRequest avaliacaoRequest, Restaurante restaurante, Usuario usuario) {
         Avaliacao avaliacao = new Avaliacao();
-        avaliacao.setNota(dto.getNota());
-        avaliacao.setComentario(dto.getComentario());
-        avaliacao.setData(dto.getData());
+        avaliacao.setNota(avaliacaoRequest.nota());
+        avaliacao.setComentario(avaliacaoRequest.comentario());
+        avaliacao.setData(avaliacaoRequest.data());
         avaliacao.setRestaurante(restaurante);
         avaliacao.setUsuario(usuario);
         return avaliacao;
     }
+
+
+    public AvaliacaoResponse toResponse(Avaliacao avaliacao) {
+        return new AvaliacaoResponse(
+                avaliacao.getId(),
+                avaliacao.getComentario(),
+                avaliacao.getNota(),
+                avaliacao.getData().toString(),
+                usuarioMapper.toResponse(avaliacao.getUsuario()),
+                restauranteMapper.toResponse(avaliacao.getRestaurante())
+
+        );
+    }
 }
+
 

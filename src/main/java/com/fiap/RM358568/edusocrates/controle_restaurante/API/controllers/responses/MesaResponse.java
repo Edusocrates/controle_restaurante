@@ -1,4 +1,5 @@
-package com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO;
+package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,17 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class MesaDTO {
+public class MesaResponse {
+
     private Long id;
     private int numero;
     private int capacidade;
     private String status;
     private Long restauranteId;
     private List<Long> reservasIds;
-
-
 }

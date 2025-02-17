@@ -1,4 +1,4 @@
-package com.fiap.RM358568.edusocrates.controle_restaurante.dominio;
+package com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;

@@ -1,6 +1,7 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.restaurante.reserva;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.ReservaDTO;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.ReservaRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.ReservaResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.ReservaUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,12 @@ public class ReservaController {
     private ReservaUseCase reservaUseCase;
 
     @GetMapping("/restaurante/{restauranteId}")
-    public ResponseEntity<List<ReservaDTO>> buscarPorRestaurante(@PathVariable Long restauranteId) {
+    public ResponseEntity<List<ReservaResponse>> buscarPorRestaurante(@PathVariable Long restauranteId) {
         return ResponseEntity.ok(reservaUseCase.buscarPorRestaurante(restauranteId));
     }
 
     @PostMapping
-    public ResponseEntity<ReservaDTO> salvar(@Validated @RequestBody ReservaDTO dto) {
-        return ResponseEntity.ok(reservaUseCase.salvar(dto));
+    public ResponseEntity<ReservaResponse> salvar(@Validated @RequestBody ReservaRequest reservaRequest) {
+        return ResponseEntity.ok(reservaUseCase.salvar(reservaRequest));
     }
 }

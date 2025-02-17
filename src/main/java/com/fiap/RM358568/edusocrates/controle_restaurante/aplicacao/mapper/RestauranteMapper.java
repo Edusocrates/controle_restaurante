@@ -1,30 +1,37 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.RestauranteDTO;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Restaurante;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.RestauranteRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.RestauranteResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RestauranteMapper {
 
-    public RestauranteDTO toDTO(Restaurante restaurante) {
-        RestauranteDTO dto = new RestauranteDTO();
-        dto.setId(restaurante.getId());
-        dto.setNome(restaurante.getNome());
-        dto.setLocalizacao(restaurante.getLocalizacao());
-        dto.setTipoDeCozinha(restaurante.getTipoDeCozinha());
-        dto.setHorariosFuncionamento(restaurante.getHorariosFuncionamento());
-        dto.setCapacidade(restaurante.getCapacidade());
-        return dto;
+    @Autowired
+    private MesaMapper mesaMapper;
+
+
+    public Restaurante toEntity(RestauranteRequest restauranteRequest) {
+        Restaurante restaurante = new Restaurante();
+        restaurante.setNome(restauranteRequest.nome());
+        restaurante.setLocalizacao(restauranteRequest.localizacao());
+        restaurante.setTipoDeCozinha(restauranteRequest.tipoDeCozinha());
+        restaurante.setHorariosFuncionamento(restauranteRequest.horariosFuncionamento());
+        restaurante.setCapacidade(restauranteRequest.capacidade());
+        return restaurante;
     }
 
-    public Restaurante toEntity(RestauranteDTO dto) {
-        Restaurante restaurante = new Restaurante();
-        restaurante.setNome(dto.getNome());
-        restaurante.setLocalizacao(dto.getLocalizacao());
-        restaurante.setTipoDeCozinha(dto.getTipoDeCozinha());
-        restaurante.setHorariosFuncionamento(dto.getHorariosFuncionamento());
-        restaurante.setCapacidade(dto.getCapacidade());
-        return restaurante;
+    public RestauranteResponse toResponse(Restaurante restaurante) {
+        return new RestauranteResponse(
+                restaurante.getId(),
+                restaurante.getNome(),
+                restaurante.getLocalizacao(),
+                restaurante.getTipoDeCozinha(),
+                restaurante.getHorariosFuncionamento(),
+                restaurante.getCapacidade(),
+                mesaMapper.toResponseList(restaurante.getMesas())
+        );
     }
 }

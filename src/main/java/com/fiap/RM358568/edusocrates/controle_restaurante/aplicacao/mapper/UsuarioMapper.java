@@ -1,27 +1,31 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.UsuarioDTO;
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.Usuario;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.UsuarioRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.UsuarioResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UsuarioMapper {
 
-    public UsuarioDTO toDTO(Usuario usuario) {
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setId(usuario.getId());
-        dto.setNome(usuario.getNome());
-        dto.setEmail(usuario.getEmail());
-        dto.setTelefone(usuario.getTelefone());
-        return dto;
+
+    public Usuario toEntity(UsuarioRequest usuarioRequest) {
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioRequest.nome());
+        usuario.setEmail(usuarioRequest.email());
+        usuario.setTelefone(usuarioRequest.telefone());
+        return usuario;
     }
 
-    public Usuario toEntity(UsuarioDTO dto) {
-        Usuario usuario = new Usuario();
-        usuario.setNome(dto.getNome());
-        usuario.setEmail(dto.getEmail());
-        usuario.setTelefone(dto.getTelefone());
-        return usuario;
+    public UsuarioResponse toResponse(Usuario usuario) {
+        return new UsuarioResponse(
+                usuario.getId(),
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuario.getTelefone(),
+                usuario.getAvaliacoes().stream().map(avaliacao -> avaliacao.getId()).toList(),
+                usuario.getReservas().stream().map(restaurante -> restaurante.getId()).toList()
+        );
     }
 }
 

@@ -1,7 +1,8 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.restaurante;
 
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.RestauranteDTO;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.RestauranteRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.RestauranteResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.RestauranteUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +19,17 @@ public class RestauranteController {
     private RestauranteUseCase restauranteUseCase;
 
     @GetMapping
-    public ResponseEntity<List<RestauranteDTO>> buscarTodos() {
+    public ResponseEntity<List<RestauranteResponse>> buscarTodos() {
         return ResponseEntity.ok(restauranteUseCase.buscarTodos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RestauranteDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<RestauranteResponse> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(restauranteUseCase.buscarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<RestauranteDTO> salvar(@Validated @RequestBody RestauranteDTO dto) {
-        return ResponseEntity.ok(restauranteUseCase.salvar(dto));
+    public ResponseEntity<RestauranteResponse> salvar(@Validated @RequestBody RestauranteRequest restauranteRequest) {
+        return ResponseEntity.ok(restauranteUseCase.salvar(restauranteRequest));
     }
 }

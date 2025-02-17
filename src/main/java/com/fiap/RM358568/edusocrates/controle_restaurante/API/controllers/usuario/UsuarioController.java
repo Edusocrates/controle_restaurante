@@ -1,6 +1,7 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.usuario;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.UsuarioDTO;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.UsuarioRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.UsuarioResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.UsuarioUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +16,12 @@ public class UsuarioController {
     private UsuarioUseCase usuarioUseCase;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<UsuarioResponse> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioUseCase.buscarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvar(@Validated @RequestBody UsuarioDTO dto) {
-        return ResponseEntity.ok(usuarioUseCase.salvar(dto));
+    public ResponseEntity<UsuarioResponse> salvar(@Validated @RequestBody UsuarioRequest usuarioRequest) {
+        return ResponseEntity.ok(usuarioUseCase.salvar(usuarioRequest));
     }
 }

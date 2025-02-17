@@ -1,7 +1,8 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.restaurante.mesa;
 
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.DTO.MesaDTO;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.MesaRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.MesaResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.MesaUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,12 @@ public class MesaController {
     private MesaUseCase mesaUseCase;
 
     @GetMapping("/restaurante/{restauranteId}")
-    public ResponseEntity<List<MesaDTO>> buscarPorRestaurante(@PathVariable Long restauranteId) {
+    public ResponseEntity<List<MesaResponse>> buscarPorRestaurante(@PathVariable Long restauranteId) {
         return ResponseEntity.ok(mesaUseCase.buscarPorRestaurante(restauranteId));
     }
 
     @PostMapping
-    public ResponseEntity<MesaDTO> salvar(@Validated @RequestBody MesaDTO dto) {
-        return ResponseEntity.ok(mesaUseCase.salvar(dto));
+    public ResponseEntity<MesaResponse> salvar(@Validated @RequestBody MesaRequest mesaRequest) {
+        return ResponseEntity.ok(mesaUseCase.salvar(mesaRequest));
     }
 }
