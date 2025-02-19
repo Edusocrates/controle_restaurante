@@ -2,7 +2,7 @@ package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases;
 
 import com.fiap.RM358568.edusocrates.controle_restaurante.API.requests.UsuarioRequest;
 import com.fiap.RM358568.edusocrates.controle_restaurante.API.responses.UsuarioResponse;
-import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.UsuarioMapper;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.mapper.UsuarioMapper;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.gateways.UsuarioGateway;
 import jakarta.transaction.Transactional;

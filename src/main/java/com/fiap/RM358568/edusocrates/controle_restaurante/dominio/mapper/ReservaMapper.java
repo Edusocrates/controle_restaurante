@@ -1,4 +1,4 @@
-package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper;
+package com.fiap.RM358568.edusocrates.controle_restaurante.dominio.mapper;
 
 import com.fiap.RM358568.edusocrates.controle_restaurante.API.requests.ReservaRequest;
 import com.fiap.RM358568.edusocrates.controle_restaurante.API.responses.ReservaResponse;

@@ -3,7 +3,7 @@ package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases;
 
 import com.fiap.RM358568.edusocrates.controle_restaurante.API.requests.ReservaRequest;
 import com.fiap.RM358568.edusocrates.controle_restaurante.API.responses.ReservaResponse;
-import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.ReservaMapper;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.mapper.ReservaMapper;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Mesa;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Reserva;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
