@@ -1,7 +1,7 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.UsuarioRequest;
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.UsuarioResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.requests.UsuarioRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.responses.UsuarioResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
 import org.springframework.stereotype.Component;
 

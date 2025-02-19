@@ -1,8 +1,8 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.restaurante.avaliacao;
 
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.AvaliacaoRequest;
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.AvaliacaoResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.requests.AvaliacaoRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.responses.AvaliacaoResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.AvaliacaoUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

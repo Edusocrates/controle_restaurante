@@ -1,4 +1,4 @@
-package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses;
+package com.fiap.RM358568.edusocrates.controle_restaurante.API.responses;
 
 
 import lombok.AllArgsConstructor;

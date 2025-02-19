@@ -1,8 +1,8 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.restaurante.mesa;
 
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.MesaRequest;
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.MesaResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.requests.MesaRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.responses.MesaResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases.MesaUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

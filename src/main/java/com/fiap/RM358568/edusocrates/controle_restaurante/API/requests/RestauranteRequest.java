@@ -1,4 +1,4 @@
-package com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests;
+package com.fiap.RM358568.edusocrates.controle_restaurante.API.requests;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

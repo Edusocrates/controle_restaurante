@@ -1,13 +1,12 @@
 package com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.usecases;
 
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.requests.AvaliacaoRequest;
-import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.responses.AvaliacaoResponse;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.requests.AvaliacaoRequest;
+import com.fiap.RM358568.edusocrates.controle_restaurante.API.responses.AvaliacaoResponse;
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.AvaliacaoMapper;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Avaliacao;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.gateways.AvaliacaoGateway;
-import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.AvaliacaoRepository;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.RestauranteRepository;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.UsuarioRepository;
 import jakarta.transaction.Transactional;
