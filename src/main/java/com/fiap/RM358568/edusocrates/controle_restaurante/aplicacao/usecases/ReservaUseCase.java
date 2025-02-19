@@ -8,48 +8,47 @@ import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Mesa;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Reserva;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
-import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.MesaRepository;
-import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.ReservaRepository;
-import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.RestauranteRepository;
-import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.UsuarioRepository;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.gateways.MesaGateway;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.gateways.ReservaGateway;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.gateways.RestauranteGateway;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.gateways.UsuarioGateway;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 public class ReservaUseCase {
 
     @Autowired
-    private ReservaRepository reservaRepository;
+    private ReservaGateway reservaGateway;
 
     @Autowired
-    private RestauranteRepository restauranteRepository;
+    private RestauranteGateway restauranteGateway;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioGateway usuarioGateway;
 
     @Autowired
-    private MesaRepository mesaRepository;
+    private MesaGateway mesaGateway;
 
     @Autowired
     private ReservaMapper reservaMapper;
 
     public List<ReservaResponse> buscarPorRestaurante(Long restauranteId) {
-        return reservaRepository.findByRestauranteId(restauranteId).stream().map(reservaMapper::toResponse).collect(Collectors.toList());
+        return reservaGateway.findByRestauranteId(restauranteId).stream().map(reservaMapper::toResponse).collect(Collectors.toList());
     }
 
     @Transactional
     public ReservaResponse salvar(ReservaRequest reservaRequest) {
-        Restaurante restaurante = restauranteRepository.findById(reservaRequest.restauranteId()).orElseThrow(() -> new RuntimeException("Restaurante não encontrado."));
-        Usuario usuario = usuarioRepository.findById(reservaRequest.usuarioId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
-        Mesa mesa = mesaRepository.findById(reservaRequest.mesaId()).orElseThrow(() -> new RuntimeException("Mesa não encontrada."));
+        Restaurante restaurante = restauranteGateway.findById(reservaRequest.restauranteId());
+        Usuario usuario = usuarioGateway.findById(reservaRequest.usuarioId());
+        Mesa mesa = mesaGateway.findById(reservaRequest.mesaId());
 
         Reserva reserva = reservaMapper.toEntity(reservaRequest, restaurante, mesa, usuario);
-        reserva = reservaRepository.save(reserva);
+        reserva = reservaGateway.save(reserva);
         return reservaMapper.toResponse(reserva);
     }
 }

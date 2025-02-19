@@ -6,6 +6,7 @@ import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.Avali
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Avaliacao;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Usuario;
+import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.gateways.AvaliacaoGateway;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.AvaliacaoRepository;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.RestauranteRepository;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.UsuarioRepository;
@@ -21,7 +22,7 @@ public class AvaliacaoUseCase {
 
 
     @Autowired
-    private AvaliacaoRepository avaliacaoRepository;
+    private AvaliacaoGateway avaliacaoGateway;
 
     @Autowired
     private RestauranteRepository restauranteRepository;
@@ -33,7 +34,7 @@ public class AvaliacaoUseCase {
     private AvaliacaoMapper avaliacaoMapper;
 
      public List<AvaliacaoResponse> buscarPorRestaurante(Long restauranteId) {
-         return avaliacaoRepository.findByRestauranteId(restauranteId)
+         return avaliacaoGateway.findByRestauranteId(restauranteId)
                  .stream()
                  .map(avaliacaoMapper::toResponse)
                  .collect(Collectors.toList());
@@ -45,7 +46,7 @@ public class AvaliacaoUseCase {
         Usuario usuario = usuarioRepository.findById(avaliacaoRequest.usuarioId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
         Avaliacao avaliacao = avaliacaoMapper.toEntity(avaliacaoRequest, restaurante, usuario);
-        avaliacao = avaliacaoRepository.save(avaliacao);
+        avaliacao = avaliacaoGateway.save(avaliacao);
         return avaliacaoMapper.toResponse(avaliacao);
     }
 }

@@ -6,6 +6,8 @@ import com.fiap.RM358568.edusocrates.controle_restaurante.API.controllers.respon
 import com.fiap.RM358568.edusocrates.controle_restaurante.aplicacao.mapper.MesaMapper;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Mesa;
 import com.fiap.RM358568.edusocrates.controle_restaurante.dominio.entities.Restaurante;
+import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.gateways.MesaRepositoryGateway;
+import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.gateways.RestauranteRepositoryGateway;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.MesaRepository;
 import com.fiap.RM358568.edusocrates.controle_restaurante.infraestrutura.repositorios.RestauranteRepository;
 import jakarta.transaction.Transactional;
@@ -20,24 +22,24 @@ public class MesaUseCase {
 
 
     @Autowired
-    private MesaRepository mesaRepository;
+    private MesaRepositoryGateway mesaRepositoryGateway;
 
     @Autowired
-    private RestauranteRepository restauranteRepository;
+    private RestauranteRepositoryGateway restauranteRepositoryGateway;
 
     @Autowired
     private MesaMapper mesaMapper;
 
     public List<MesaResponse> buscarPorRestaurante(Long restauranteId) {
-        return mesaRepository.findByRestauranteId(restauranteId).stream().map(mesaMapper::toResponse).collect(Collectors.toList());
+        return mesaRepositoryGateway.findByRestauranteId(restauranteId).stream().map(mesaMapper::toResponse).collect(Collectors.toList());
     }
 
     @Transactional
     public MesaResponse salvar(MesaRequest mesaRequest) {
-        Restaurante restaurante = restauranteRepository.findById(mesaRequest.restauranteId()).orElseThrow(() -> new RuntimeException("Restaurante não encontrado."));
+        Restaurante restaurante = restauranteRepositoryGateway.findById(mesaRequest.restauranteId());
 
         Mesa mesa = mesaMapper.toEntity(mesaRequest, restaurante);
-        mesa = mesaRepository.save(mesa);
+        mesa = mesaRepositoryGateway.save(mesa);
         return mesaMapper.toResponse(mesa);
     }
 }
