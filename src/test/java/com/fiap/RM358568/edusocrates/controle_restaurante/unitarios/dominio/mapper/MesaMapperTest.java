@@ -12,9 +12,12 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MesaMapperTest {
 
@@ -57,5 +60,36 @@ class MesaMapperTest {
         assertThat(response.getNumero()).isEqualTo(10);
         assertThat(response.getCapacidade()).isEqualTo(4);
 
+    }
+
+
+    @Test
+    void testToResponseList() {
+        Mesa mesa1 = new Mesa();
+        Restaurante restaurante = new Restaurante(1L, "Restaurante Teste", "Endereço X", "teste", "teste", 1, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        mesa1.setId(1L);
+        mesa1.setNumero(10);
+        mesa1.setCapacidade(4);
+        mesa1.setStatus("Disponível");
+        mesa1.setReservas(List.of(new Reserva(), new Reserva()));
+        mesa1.setRestaurante(restaurante);
+
+        Mesa mesa2 = new Mesa();
+        mesa2.setId(2L);
+        mesa2.setNumero(20);
+        mesa2.setCapacidade(6);
+        mesa2.setStatus("Ocupado");
+        mesa2.setReservas(List.of(new Reserva(), new Reserva()));
+        mesa2.setRestaurante(restaurante);
+
+        List<Mesa> mesas = Arrays.asList(mesa1, mesa2);
+        List<MesaResponse> mesaResponses = mesaMapper.toResponseList(mesas);
+
+        assertNotNull(mesaResponses);
+        assertEquals(2, mesaResponses.size());
+        assertEquals(mesa1.getId(), mesaResponses.get(0).getId());
+        assertEquals(mesa2.getId(), mesaResponses.get(1).getId());
+        assertEquals(mesa1.getNumero(), mesaResponses.get(0).getNumero());
+        assertEquals(mesa2.getNumero(), mesaResponses.get(1).getNumero());
     }
 }

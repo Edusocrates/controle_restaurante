@@ -31,6 +31,8 @@ public class MesaMapper {
                 mesa.getReservas().stream().map(reserva -> reserva.getId()).toList()
         );
     }
+
+
     public List<MesaResponse> toResponseList(List<Mesa> mesas) {
         return mesas.stream()
                 .map(this::toResponse)
