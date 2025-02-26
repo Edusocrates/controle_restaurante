@@ -107,10 +107,9 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.10</version>
+				<version>0.8.11</version>
 				<executions>
 					<execution>
-						<id>prepare-agent</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
@@ -123,7 +122,14 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<excludes>
+
+						<exclude>com/fiap/RM358568/edusocrates/controle_restaurante/infraestrutura/gateways/**</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
+
 
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
