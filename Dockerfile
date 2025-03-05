@@ -19,5 +19,5 @@ COPY --from=builder /app/target/*.jar app.jar
 # Expor a porta 8080 para a aplicação Spring Boot
 EXPOSE 8080
 
-# Define o comando de inicialização da aplicação
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./unroandom","-jar", "app.jar"]
+# Define o comando de inicialização da aplicação com o perfil "local"
+ENTRYPOINT ["java", "-Dspring.profiles.active=local", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
