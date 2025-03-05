@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/restaurantes")
-@Tag(name = "Configurações estacionamento", description = "Operações relacionadas as configurações e funcionamento do restaurante")
+@Tag(name = "Configurações restaurante", description = "Operações relacionadas as configurações e funcionamento do restaurante")
 public class RestauranteController {
 
     @Autowired
