@@ -22,7 +22,7 @@ services:
       - db
     environment:
       SPRING_PROFILES_ACTIVE: local
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydatabase  # Use a porta 5432 interna
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydatabase # URL do banco de dados
       SPRING_DATASOURCE_USERNAME: myuser
       SPRING_DATASOURCE_PASSWORD: secret
     ports:
