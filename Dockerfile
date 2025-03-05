@@ -19,8 +19,10 @@ COPY --from=builder /app/target/*.jar app.jar
 # Expor a porta 8080
 EXPOSE 8080
 
-# Define a variável de ambiente para a porta do Spring Boot
-ENV SERVER_PORT=8080
+# Define as variáveis de ambiente para o PostgreSQL
+ENV SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cv48v08gph6c73acjm8g-a:5432/controle_restaurante_16uj
+ENV SPRING_DATASOURCE_USERNAME=controle_restaurante_16uj_user
+ENV SPRING_DATASOURCE_PASSWORD=CIY9LGsASviws5OUosdY8cbBRYsSjyoa
 
-# Define o comando de inicialização da aplicação com o perfil "local" e porta fixa
+# Define o comando de inicialização da aplicação com o perfil "local"
 ENTRYPOINT ["java", "-Dspring.profiles.active=local", "-Dserver.port=8080", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]

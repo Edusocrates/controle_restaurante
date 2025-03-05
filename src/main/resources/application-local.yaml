@@ -1,14 +1,17 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mydatabase
-    username: myuser
-    password: secret
+    url: jdbc:postgresql://dpg-cv48v08gph6c73acjm8g-a:5432/controle_restaurante_16uj
+    username: controle_restaurante_16uj_user
+    password: CIY9LGsASviws5OUosdY8cbBRYsSjyoa
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-timeout: 60000  # Tempo de espera para a conexão
       maximum-pool-size: 10
 
   jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
   logging:
