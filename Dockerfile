@@ -1,5 +1,5 @@
 # Etapa 1: Construção do projeto com Maven
-FROM maven:3.8.6-openjdk-17 AS builder
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
 
 # Copia os arquivos do projeto para dentro do container
