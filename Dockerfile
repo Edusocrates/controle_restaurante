@@ -16,8 +16,11 @@ WORKDIR /app
 # Copia o JAR gerado na etapa de build para o container final
 COPY --from=builder /app/target/*.jar app.jar
 
-# Expor a porta 8080 para a aplicação Spring Boot
+# Expor a porta 8080
 EXPOSE 8080
 
-# Define o comando de inicialização da aplicação com o perfil "local"
-ENTRYPOINT ["java", "-Dspring.profiles.active=local", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
+# Define a variável de ambiente para a porta do Spring Boot
+ENV SERVER_PORT=8080
+
+# Define o comando de inicialização da aplicação com o perfil "local" e porta fixa
+ENTRYPOINT ["java", "-Dspring.profiles.active=local", "-Dserver.port=8080", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
