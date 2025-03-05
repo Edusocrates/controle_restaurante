@@ -7,7 +7,7 @@ COPY pom.xml .
 COPY src ./src
 
 # Executa a compilação do projeto e gera o JAR
-RUN mvn clean package -DskipTests
+RUN mvn package -DskipTests
 
 # Etapa 2: Container final da aplicação
 FROM openjdk:17-jdk-slim
@@ -20,4 +20,4 @@ COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
 
 # Define o comando de inicialização da aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./unroandom","-jar", "app.jar"]
