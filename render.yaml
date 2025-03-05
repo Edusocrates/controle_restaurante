@@ -1,0 +1,23 @@
+services:
+  - name: app
+    type: web
+    build:
+      dockerfilePath: ./Dockerfile
+    env:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db.internal:5432/mydatabase
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: secret
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+
+databases:
+  - name: db
+    database: postgres
+    plan: free
+    env:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: mydatabase
