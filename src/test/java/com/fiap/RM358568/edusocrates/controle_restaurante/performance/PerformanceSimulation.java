@@ -1,4 +1,4 @@
-package com.fiap.RM358568.edusocrates.controle_restaurante.unitarios.performance;
+package com.fiap.RM358568.edusocrates.controle_restaurante.performance;
 
 import io.gatling.javaapi.core.ActionBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
